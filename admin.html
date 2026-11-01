@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - StageFinder Maroc</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #F4ECEE;
+            color: #292929;
+        }
+
+        header {
+            background: #400014;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header span {
+            color: #D6B64C;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .stats {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .stats h2 {
+            color: #400014;
+        }
+
+        #total {
+            font-size: 35px;
+            color: #D6B64C;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .application {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            border-left: 5px solid #D6B64C;
+        }
+
+        .application h3 {
+            color: #400014;
+            margin-bottom: 12px;
+        }
+
+        .application p {
+            margin-bottom: 9px;
+        }
+
+        button {
+            background: #400014;
+            color: #D6B64C;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .empty {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>StageFinder <span>Maroc</span></h1>
+        <p>Administration Dashboard</p>
+    </header>
+
+    <div class="container">
+
+        <div class="stats">
+            <h2>Total des candidatures</h2>
+            <div id="total">0</div>
+        </div>
+
+        <h2>Liste des candidatures</h2>
+
+        <div id="liste"></div>
+
+        <button onclick="afficherCandidatures()">
+            Actualiser
+        </button>
+
+    </div>
+
+    <script>
+
+        function afficherCandidatures() {
+
+            let candidatures = JSON.parse(
+                localStorage.getItem("candidatures") || "[]"
+            );
+
+            document.getElementById("total").innerText =
+                candidatures.length;
+
+            let liste = document.getElementById("liste");
+
+            liste.innerHTML = "";
+
+            if (candidatures.length === 0) {
+
+                liste.innerHTML =
+                    '<div class="empty">Aucune candidature pour le moment.</div>';
+
+                return;
+            }
+
+            candidatures.forEach(function(c, index) {
+
+                let carte = document.createElement("div");
+
+                carte.className = "application";
+
+                let titre = document.createElement("h3");
+                titre.textContent = c.nom;
+
+                let infos = [
+                    "Email : " + c.email,
+                    "Téléphone : " + c.telephone,
+                    "Formation : " + c.formation,
+                    "CV : " + c.cv,
+                    "Date : " + c.date,
+                    "Motivation : " + c.motivation
+                ];
+
+                carte.appendChild(titre);
+
+                infos.forEach(function(info) {
+                    let p = document.createElement("p");
+                    p.textContent = info;
+                    carte.appendChild(p);
+                });
+
+                let supprimer = document.createElement("button");
+
+                supprimer.textContent = "Supprimer";
+
+                supprimer.onclick = function() {
+
+                    if (confirm("Supprimer cette candidature ?")) {
+
+                        candidatures.splice(index, 1);
+
+                        localStorage.setItem(
+                            "candidatures",
+                            JSON.stringify(candidatures)
+                        );
+
+                        afficherCandidatures();
+                    }
+                };
+
+                carte.appendChild(supprimer);
+
+                liste.appendChild(carte);
+
+            });
+        }
+
+        afficherCandidatures();
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StageFinder Maroc</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            StageFinder <span>Maroc</span>
+        </div>
+
+        <nav>
+            <a href="#accueil">Accueil</a>
+            <a href="#stages">Stages</a>
+            <a href="#about">À propos</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <a href="#stages" class="btn">Trouver un stage</a>
+    </header>
+
+    <section class="hero" id="accueil">
+
+        <p class="subtitle">BIENVENUE SUR STAGEFINDER MAROC</p>
+
+        <h1>
+            Trouvez votre stage.<br>
+            Construisez votre avenir.
+        </h1>
+
+        <p class="description">
+            Découvrez les meilleures opportunités de stage
+            partout au Maroc.
+        </p>
+
+        <div class="search">
+
+            <input type="text" id="ville"
+            placeholder="Ville (Casablanca, Meknès...)">
+
+            <input type="text" id="domaine"
+            placeholder="Domaine (Informatique...)">
+
+            <button onclick="rechercher()">
+                Rechercher
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="stages" id="stages">
+
+        <p class="subtitle">OPPORTUNITÉS</p>
+
+        <h2>Stages disponibles</h2>
+
+        <div class="cards" id="resultats">
+
+            <div class="card">
+                <span class="tag">Informatique</span>
+
+                <h3>Stage Développement Web</h3>
+
+                <p>Entreprise : Tech Maroc</p>
+                <p>Ville : Casablanca</p>
+                <p>Type : Stage d'initiation</p>
+
+                <button onclick="voirDetails('Tech Maroc',
+                  'Stage Développement Web',
+                  'Casablanca',
+                  'Informatique',
+                 'Stage d’initiation')">
+                 Voir les détails
+                 </button>
+                 <button onclick="voirDetails('Digital Solutions',
+                 'Stage Réseaux Informatiques',
+                 'Meknès',
+                 'Réseaux',
+                 'Stage technique')">
+                 Voir les détails
+                 </button>
+                 <button onclick="voirDetails('Future IT',
+                 'Stage Développement Java',
+                 'Rabat',
+                 'Informatique',
+                 'Stage technique')">
+                 Voir les détails
+                 </button>
+            </div>
+
+            <div class="card">
+                <span class="tag">Réseaux</span>
+
+                <h3>Stage Réseaux Informatiques</h3>
+
+                <p>Entreprise : Digital Solutions</p>
+                <p>Ville : Meknès</p>
+                <p>Type : Stage technique</p>
+
+                <button onclick="voirDetails('Digital Solutions')">
+                    Voir les détails
+                </button>
+            </div>
+
+            <div class="card">
+                <span class="tag">Informatique</span>
+
+                <h3>Stage Développement Java</h3>
+
+                <p>Entreprise : Future IT</p>
+                <p>Ville : Rabat</p>
+                <p>Type : Stage technique</p>
+
+                <button onclick="voirDetails('Future IT')">
+                    Voir les détails
+                </button>
+            </div>
+
+        </div>
+
+        <p id="message"></p>
+
+    </section>
+
+    <section class="about" id="about">
+        <h2>Pourquoi StageFinder Maroc ?</h2>
+
+        <p>
+            Notre objectif est de faciliter la recherche
+            de stages pour les étudiants marocains.
+        </p>
+    </section>
+    <section id="details" class="details" style="display:none;">
+
+    <h2>Détails de l'offre</h2>
+
+    <div class="detail-card">
+
+        <h3 id="detailTitre"></h3>
+
+        <p id="detailEntreprise"></p>
+        <p id="detailVille"></p>
+        <p id="detailDomaine"></p>
+        <p id="detailType"></p>
+
+        <button onclick="postuler()">
+            Postuler maintenant
+        </button>
+
+        <button class="back" onclick="fermerDetails()">
+            Retour aux offres
+        </button>
+
+    </div>
+
+</section><section class="application" id="application"
+style="display:none;">
+
+    <h2>Déposer votre candidature</h2>
+
+    <p class="application-text">
+        Remplissez le formulaire pour postuler à ce stage.
+    </p>
+
+    <form id="candidatureForm">
+
+        <label>Nom complet</label>
+        <input type="text" id="nom"
+        placeholder="Votre nom complet" required>
+
+        <label>Email</label>
+        <input type="email" id="email"
+        placeholder="exemple@gmail.com" required>
+
+        <label>Téléphone</label>
+        <input type="tel" id="telephone"
+        placeholder="Votre numéro" required>
+
+        <label>Formation</label>
+        <select id="formation" required>
+            <option value="">Choisir une formation</option>
+            <option>Génie Informatique</option>
+            <option>Développement Web</option>
+            <option>Réseaux Informatiques</option>
+            <option>Autre</option>
+        </select>
+
+        <label>Lettre de motivation</label>
+        <textarea id="motivation"
+        placeholder="Pourquoi souhaitez-vous ce stage ?"
+        required></textarea>
+
+        <label>Votre CV (PDF)</label>
+        <input type="file" id="cv"
+        accept=".pdf,application/pdf" required>
+
+        <button type="submit">
+            Envoyer ma candidature
+        </button>
+
+    </form>
+
+    <p id="confirmation"></p>
+
+</section>
+
+    <footer id="contact">
+        <a href="admin.html" style="color:#D6B64C;">
+    Espace Admin
+</a>
+        <h3>StageFinder Maroc</h3>
+        <p>Votre avenir professionnel commence ici.</p>
+        <p>© 2026 StageFinder Maroc</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
